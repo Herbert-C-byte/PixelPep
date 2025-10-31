@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pixel Pep - Marketing & Web</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+    body { background: #0c0c0c; color: #f1f1f1; }
+    header { padding: 2rem 5%; display: flex; justify-content: space-between; align-items: center; }
+    header h1 { font-size: 1.5rem; }
+    nav a { color: #f1f1f1; margin-left: 1.5rem; text-decoration: none; }
+
+    .hero { padding: 6rem 5%; text-align: center; }
+    .hero h2 { font-size: 3rem; margin-bottom: 1rem; }
+    .hero p { font-size: 1.2rem; margin-bottom: 2rem; color: #ccc; }
+    .hero a { background: #007bff; padding: 0.8rem 1.5rem; border-radius: 5px; color: #fff; text-decoration: none; font-weight: bold; }
+
+    .services { padding: 5rem 5%; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+    .card { background: #111; padding: 2rem; border-radius: 10px; border: 1px solid #222; }
+    .card h3 { margin-bottom: 1rem; }
+    .card p { color: #bbb; }
+
+    .portfolio { padding: 5rem 5%; }
+    .portfolio h2 { margin-bottom: 2rem; text-align: center; font-size: 2.2rem; }
+    .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+    .portfolio-item { background: #111; height: 180px; border-radius: 10px; border: 1px solid #222; }
+
+    .cta { padding: 5rem 5%; text-align: center; }
+    .cta h2 { font-size: 2rem; margin-bottom: 1rem; }
+    .cta a { background: #007bff; padding: 1rem 2rem; color: #fff; text-decoration: none; border-radius: 5px; font-weight: bold; }
+
+    footer { padding: 2rem 5%; text-align: center; color: #777; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Pixel Pep</h1>
+    <nav>
+      <a href="#services">Serviços</a>
+      <a href="#portfolio">Portfólio</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Marketing. Publicidade. Websites.</h2>
+    <p>Transformamos ideias em presença digital de impacto para empreendedores e empresas de qualquer escala.</p>
+    <a href="#contacto">Começar Agora</a>
+  </section>
+
+  <section id="services" class="services">
+    <div class="card">
+      <h3>Marketing Digital</h3>
+      <p>Campanhas estratégicas para aumentar visibilidade, tráfego e conversões.</p>
+    </div>
+    <div class="card">
+      <h3>Publicidade</h3>
+      <p>Design e comunicação direcionada para destacar a sua marca.</p>
+    </div>
+    <div class="card">
+      <h3>Criação de Websites</h3>
+      <p>Sites modernos, responsivos e otimizados para performance e credibilidade.</p>
+    </div>
+  </section>
+
+  <section id="portfolio" class="portfolio">
+    <h2>Portfólio</h2>
+    <div class="portfolio-grid">
+      <div class="portfolio-item"></div>
+      <div class="portfolio-item"></div>
+      <div class="portfolio-item"></div>
+      <div class="portfolio-item"></div>
+    </div>
+  </section>
+
+  <section id="contacto" class="cta">
+    <h2>Pronto para elevar a sua marca?</h2>
+    <a href="mailto:pixelpep@mail.com">Contactar Agora</a>
+  </section>
+
+  <footer>
+    © 2025 Pixel Pep. Todos os direitos reservados.
+  </footer>
+</body>
+</html>
