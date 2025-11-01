@@ -1,86 +1,368 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pixel Pep - Marketing & Web</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pixel Pep — Marketing, Publicidade & Websites</title>
+  <meta name="description" content="Pixel Pep — Estratégia de marketing, criatividade em publicidade e desenvolvimento de websites. Soluções para empreendedores e empresas." />
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
-    body { background: #0c0c0c; color: #f1f1f1; }
-    header { padding: 2rem 5%; display: flex; justify-content: space-between; align-items: center; }
-    header h1 { font-size: 1.5rem; }
-    nav a { color: #f1f1f1; margin-left: 1.5rem; text-decoration: none; }
+    :root{
+      --bg:#0b1220; /* deep navy base */
+      --card:#0f1724;
+      --glass: rgba(255,255,255,0.06);
+      --accent:#0b61d1; /* royal blue */
+      --accent-2:#4aa3ff; /* light blue */
+      --muted:#dfe8f6; /* off-white */
+      --glass-blur:10px;
+      --radius:14px;
+      --glass-border: rgba(255,255,255,0.06);
+      --shadow: 0 6px 20px rgba(2,6,23,0.6);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,Segoe UI,Roboto,Arial;
+      background: linear-gradient(180deg,var(--bg),#071022 60%);
+      color:var(--muted);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.4;
+    }
 
-    .hero { padding: 6rem 5%; text-align: center; }
-    .hero h2 { font-size: 3rem; margin-bottom: 1rem; }
-    .hero p { font-size: 1.2rem; margin-bottom: 2rem; color: #ccc; }
-    .hero a { background: #007bff; padding: 0.8rem 1.5rem; border-radius: 5px; color: #fff; text-decoration: none; font-weight: bold; }
+    /* layout */
+    .container{max-width:1100px;margin:0 auto;padding:2rem}
 
-    .services { padding: 5rem 5%; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
-    .card { background: #111; padding: 2rem; border-radius: 10px; border: 1px solid #222; }
-    .card h3 { margin-bottom: 1rem; }
-    .card p { color: #bbb; }
+    header{display:flex;align-items:center;justify-content:space-between;padding:1rem 0}
+    .brand{display:flex;gap:0.8rem;align-items:center}
+    .logo{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:700;letter-spacing:0.6px;color:white;box-shadow:var(--shadow)}
+    header nav{display:flex;gap:1rem;align-items:center}
+    header a{color:var(--muted);text-decoration:none;padding:0.35rem 0.6rem;border-radius:8px;font-weight:600}
+    header a.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white}
 
-    .portfolio { padding: 5rem 5%; }
-    .portfolio h2 { margin-bottom: 2rem; text-align: center; font-size: 2.2rem; }
-    .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
-    .portfolio-item { background: #111; height: 180px; border-radius: 10px; border: 1px solid #222; }
+    /* hero */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:2rem;align-items:center;padding:3rem 0}
+    .hero .kicker{color:var(--accent-2);font-weight:700;margin-bottom:0.5rem}
+    .hero h1{font-size:2.2rem;margin-bottom:0.6rem;color:#f8fbff}
+    .hero p{color:rgba(223,232,246,0.9);margin-bottom:1.2rem}
 
-    .cta { padding: 5rem 5%; text-align: center; }
-    .cta h2 { font-size: 2rem; margin-bottom: 1rem; }
-    .cta a { background: #007bff; padding: 1rem 2rem; color: #fff; text-decoration: none; border-radius: 5px; font-weight: bold; }
+    /* glass card */
+    .card-glass{background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.02));backdrop-filter:blur(var(--glass-blur));border-radius:var(--radius);padding:1.4rem;border:1px solid var(--glass-border);box-shadow:var(--shadow)}
 
-    footer { padding: 2rem 5%; text-align: center; color: #777; font-size: 0.9rem; }
+    /* contact form */
+    form{display:flex;flex-direction:column;gap:0.7rem}
+    input,textarea,select{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:0.7rem;border-radius:10px;color:var(--muted);outline:none}
+    input:focus,textarea:focus{border:1px solid var(--accent-2);box-shadow:0 6px 18px rgba(10,88,200,0.08)}
+    button{background:linear-gradient(90deg,var(--accent),var(--accent-2));border:none;padding:0.85rem 1rem;border-radius:10px;color:white;font-weight:700;cursor:pointer}
+
+    /* services */
+    .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.4rem}
+    .service{padding:1.2rem;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.015),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);transition:transform .28s, box-shadow .28s}
+    .service:hover{transform:translateY(-8px);box-shadow:0 10px 30px rgba(4,26,63,0.6)}
+    .service h3{margin-bottom:0.6rem}
+    .badge{display:inline-block;padding:0.25rem 0.6rem;border-radius:999px;background:rgba(255,255,255,0.03);font-weight:700;color:var(--accent-2);font-size:0.8rem}
+
+    /* portfolio */
+    .portfolio-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:1rem}
+    .piece{height:140px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:800;color:white}
+
+    /* interactive cards */
+    .interactive{position:relative;overflow:hidden}
+    .interactive .meta{position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(2,6,23,0.6));opacity:0;transition:opacity .28s;padding:1rem}
+    .interactive:hover .meta{opacity:1}
+
+    /* about */
+    .about{display:flex;gap:2rem;align-items:center;margin-top:2rem}
+    .about p{color:rgba(223,232,246,0.95)}
+
+    /* faq */
+    .faq{margin-top:2rem}
+    .faq-item{background:var(--card);padding:1rem;border-radius:10px;margin-bottom:0.8rem;border:1px solid rgba(255,255,255,0.03)}
+    .faq-item button{width:100%;background:transparent;border:none;color:var(--muted);display:flex;justify-content:space-between;align-items:center;padding:0}
+    .faq-content{max-height:0;overflow:hidden;transition:max-height .28s}
+    .faq-item.open .faq-content{max-height:240px}
+
+    /* footer */
+    footer{margin-top:3rem;padding:2rem 0;color:rgba(223,232,246,0.6);text-align:center}
+
+    /* responsive */
+    @media(max-width:1000px){.hero{grid-template-columns:1fr}.services-grid{grid-template-columns:repeat(2,1fr)}.portfolio-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:640px){.container{padding:1rem}.services-grid{grid-template-columns:1fr}.portfolio-grid{grid-template-columns:1fr}.hero h1{font-size:1.6rem}}
+
+    /* utility */
+    .muted{color:rgba(223,232,246,0.7)}
+    .row{display:flex;gap:1rem;align-items:center}
+    .pill{padding:0.3rem 0.6rem;border-radius:999px;background:rgba(255,255,255,0.02);font-weight:700}
+
   </style>
 </head>
 <body>
-  <header>
-    <h1>Pixel Pep</h1>
-    <nav>
-      <a href="#services">Serviços</a>
-      <a href="#portfolio">Portfólio</a>
-      <a href="#contacto">Contacto</a>
-    </nav>
-  </header>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">PP</div>
+        <div>
+          <div style="font-weight:800">Pixel Pep</div>
+          <div class="muted" style="font-size:12px">Marketing · Publicidade · Websites</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#services">Serviços</a>
+        <a href="#portfolio">Portfólio</a>
+        <a href="#about">Sobre</a>
+        <a href="#faq">FAQ</a>
+        <a class="primary" href="#contact">Contacto</a>
+      </nav>
+    </header>
 
-  <section class="hero">
-    <h2>Marketing. Publicidade. Websites.</h2>
-    <p>Transformamos ideias em presença digital de impacto para empreendedores e empresas de qualquer escala.</p>
-    <a href="#contacto">Começar Agora</a>
-  </section>
+    <main>
+      <section class="hero">
+        <div>
+          <div class="kicker">Pixel Pep — Luanda, Angola</div>
+          <h1>Impulsionamos marcas com marketing estratégico e websites que convertem.</h1>
+          <p>Serviços completos: marketing digital, campanhas publicitárias e desenvolvimento web. Para empresários, PMEs e corporações — soluções ágeis e escaláveis.</p>
 
-  <section id="services" class="services">
-    <div class="card">
-      <h3>Marketing Digital</h3>
-      <p>Campanhas estratégicas para aumentar visibilidade, tráfego e conversões.</p>
-    </div>
-    <div class="card">
-      <h3>Publicidade</h3>
-      <p>Design e comunicação direcionada para destacar a sua marca.</p>
-    </div>
-    <div class="card">
-      <h3>Criação de Websites</h3>
-      <p>Sites modernos, responsivos e otimizados para performance e credibilidade.</p>
-    </div>
-  </section>
+          <div class="row" style="margin-top:1rem">
+            <a class="primary" href="#contact">Pedir Proposta</a>
+            <a href="#portfolio" style="padding:0.6rem 0.9rem;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.03);text-decoration:none;color:var(--muted);font-weight:700;margin-left:0.6rem">Ver Portfólio</a>
+          </div>
 
-  <section id="portfolio" class="portfolio">
-    <h2>Portfólio</h2>
-    <div class="portfolio-grid">
-      <div class="portfolio-item"></div>
-      <div class="portfolio-item"></div>
-      <div class="portfolio-item"></div>
-      <div class="portfolio-item"></div>
-    </div>
-  </section>
+          <div class="row" style="margin-top:1rem;font-size:13px;color:rgba(223,232,246,0.75)">
+            <div class="pill">Email: pixelpep@mail.com</div>
+            <div class="pill">Tel: +244 923 000 000</div>
+            <div class="pill">WhatsApp</div>
+          </div>
+        </div>
 
-  <section id="contacto" class="cta">
-    <h2>Pronto para elevar a sua marca?</h2>
-    <a href="mailto:pixelpep@mail.com">Contactar Agora</a>
-  </section>
+        <aside class="card-glass">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem">
+            <div style="font-weight:800">Consulta Rápida</div>
+            <div class="muted" style="font-size:12px">Resposta em 24h</div>
+          </div>
 
-  <footer>
-    © 2025 Pixel Pep. Todos os direitos reservados.
-  </footer>
+          <form id="leadForm">
+            <input id="nome" placeholder="Nome completo" required />
+            <input id="empresa" placeholder="Empresa (opcional)" />
+            <input id="email" type="email" placeholder="email@exemplo.com" required />
+            <select id="servico">
+              <option value="Marketing Digital">Marketing Digital</option>
+              <option value="Publicidade">Publicidade</option>
+              <option value="Criação de Websites">Criação de Websites</option>
+            </select>
+            <textarea id="mensagem" placeholder="Breve descrição do projecto" rows="3"></textarea>
+            <button type="submit">Enviar pedido</button>
+            <div id="result" class="muted" style="font-size:13px;margin-top:0.6rem"></div>
+          </form>
+        </aside>
+      </section>
+
+      <!-- SERVICES -->
+      <section id="services">
+        <div style="display:flex;justify-content:space-between;align-items:end">
+          <div>
+            <h2 style="margin:0">Serviços</h2>
+            <div class="muted" style="margin-top:6px">Soluções completas, entregáveis claros e escaláveis.</div>
+          </div>
+          <div class="badge">Projetos para todos os tamanhos</div>
+        </div>
+
+        <div class="services-grid">
+          <div class="service interactive" onclick="openService('marketing')">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <h3>Marketing Digital</h3>
+              <div class="muted">Estratégia & Performance</div>
+            </div>
+            <p class="muted" style="margin-top:0.6rem">Campanhas pagas, SEO, email marketing, social media, análise e otimização para conversões.</p>
+            <div class="meta">
+              <div style="position:absolute;bottom:12px;left:12px;color:white;font-weight:700">Ver mais →</div>
+            </div>
+          </div>
+
+          <div class="service interactive" onclick="openService('publicidade')">
+            <h3>Publicidade</h3>
+            <p class="muted">Criação de materiais, concepção visual, produção de anúncios e gestão de campanhas criativas offline e online.</p>
+            <div class="meta"><div style="position:absolute;bottom:12px;left:12px;color:white;font-weight:700">Ver mais →</div></div>
+          </div>
+
+          <div class="service interactive" onclick="openService('web')">
+            <h3>Criação de Websites</h3>
+            <p class="muted">Sites responsivos, landing pages, e-commerces, integração com analytics, SEO on-page e manutenção.</p>
+            <div class="meta"><div style="position:absolute;bottom:12px;left:12px;color:white;font-weight:700">Ver mais →</div></div>
+          </div>
+        </div>
+
+        <!-- Service details (modals) -->
+        <div id="serviceModal" class="card-glass" style="margin-top:1rem;display:none">
+          <button onclick="closeService()" style="float:right;background:transparent;border:none;color:var(--muted);font-weight:800;cursor:pointer">✕</button>
+          <div id="serviceContent"></div>
+        </div>
+      </section>
+
+      <!-- PORTFOLIO -->
+      <section id="portfolio">
+        <h2>Portfólio — Trabalhos selecionados</h2>
+        <div class="portfolio-grid">
+          <div class="piece" onclick="openPiece('Projeto A')">Projeto A</div>
+          <div class="piece" onclick="openPiece('Projeto B')">Projeto B</div>
+          <div class="piece" onclick="openPiece('Projeto C')">Projeto C</div>
+          <div class="piece" onclick="openPiece('Projeto D')">Projeto D</div>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about">
+        <div class="about">
+          <div style="flex:1">
+            <h2>Sobre a Pixel Pep</h2>
+            <p>A Pixel Pep combina estratégia, criatividade e execução técnica. Com know‑how em marketing digital, publicidade e desenvolvimento web, entregamos soluções que geram resultados mensuráveis. Trabalhamos com startups, PMEs e empresas estabelecidas — adaptamos o plano ao orçamento e ao objetivo.</p>
+            <ul class="muted" style="margin-top:0.8rem">
+              <li>Abordagem full‑funnel: awareness → aquisição → retenção</li>
+              <li>Relatórios mensais e métricas acionáveis</li>
+              <li>Entrega rápida e escalabilidade</li>
+            </ul>
+          </div>
+          <div style="width:320px">
+            <div class="card-glass">
+              <div style="font-weight:800;margin-bottom:0.4rem">Contactos</div>
+              <div class="muted" style="font-size:13px">Email: pixelpep@mail.com</div>
+              <div class="muted" style="font-size:13px">Tel: +244 923 000 000</div>
+              <div style="margin-top:0.6rem;display:flex;gap:0.6rem">
+                <a href="#" style="text-decoration:none;padding:0.5rem 0.8rem;border-radius:8px;background:rgba(255,255,255,0.03);font-weight:700">Facebook</a>
+                <a href="https://wa.me/244923000000" style="text-decoration:none;padding:0.5rem 0.8rem;border-radius:8px;background:rgba(255,255,255,0.03);font-weight:700">WhatsApp</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq">
+        <h2>FAQ</h2>
+        <div class="faq">
+          <div class="faq-item">
+            <button onclick="toggleFaq(this)">Quanto tempo demora um website? <span>+</span></button>
+            <div class="faq-content muted"><p>Dependendo da complexidade: landing page 3–7 dias; site corporativo 1–3 semanas; e‑commerce 3–6 semanas. Prazo inclui revisão e testes.</p></div>
+          </div>
+
+          <div class="faq-item">
+            <button onclick="toggleFaq(this)">Vocês fazem manutenção e SEO? <span>+</span></button>
+            <div class="faq-content muted"><p>Sim. Oferecemos pacotes de manutenção, atualizações de conteúdo e otimização on‑page e técnica.</p></div>
+          </div>
+
+          <div class="faq-item">
+            <button onclick="toggleFaq(this)">Como solicito uma proposta? <span>+</span></button>
+            <div class="faq-content muted"><p>Preenche o formulário no topo ou envia um email para pixelpep@mail.com com detalhes do projecto. Respondemos em até 24h úteis.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact (larger) -->
+      <section id="contact" style="margin-top:2rem">
+        <h2>Contacto</h2>
+        <div style="display:grid;grid-template-columns:1fr 420px;gap:1rem;margin-top:1rem">
+          <div class="card-glass">
+            <h3>Enviar pedido</h3>
+            <form id="contactForm">
+              <input id="c-name" placeholder="Nome completo" required />
+              <input id="c-email" type="email" placeholder="email@exemplo.com" required />
+              <input id="c-phone" placeholder="Telefone" />
+              <select id="c-service"><option>Marketing Digital</option><option>Publicidade</option><option>Criação de Websites</option></select>
+              <textarea id="c-desc" rows="5" placeholder="Descreva o projecto / objetivo"></textarea>
+              <button type="submit">Enviar</button>
+              <div id="c-result" class="muted" style="margin-top:0.6rem"></div>
+            </form>
+          </div>
+
+          <aside class="card-glass">
+            <h3>Informação</h3>
+            <p class="muted">Pixel Pep — Luanda, Angola<br/>Email: pixelpep@mail.com<br/>Tel: +244 923 000 000</p>
+            <div style="margin-top:0.6rem">
+              <strong>Planos sugeridos</strong>
+              <ul class="muted" style="margin-top:0.5rem">
+                <li>Starter — Landing page + ADS básico</li>
+                <li>Growth — Site + Campanhas + Relatórios</li>
+                <li>Enterprise — E‑commerce + Gestão completa</li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <div>© 2025 Pixel Pep — Luanda, Angola • Desenvolvido por Pixel Pep</div>
+    </footer>
+  </div>
+
+  <script>
+    // form handlers (mock / functional): opens mailto with content as fallback and also simulates submission
+    function serializeLead(form){
+      const nome=document.getElementById('nome').value||'';
+      const empresa=document.getElementById('empresa').value||'';
+      const email=document.getElementById('email').value||'';
+      const serv=document.getElementById('servico').value||'';
+      const msg=document.getElementById('mensagem').value||'';
+      return {nome,empresa,email,serv,msg};
+    }
+    document.getElementById('leadForm').addEventListener('submit',function(e){
+      e.preventDefault();
+      const data=serializeLead();
+      document.getElementById('result').textContent='A enviar...';
+      // Simulate network + mailto fallback
+      setTimeout(()=>{
+        const subject=encodeURIComponent('Pedido de contacto — '+data.serv);
+        const body=encodeURIComponent('Nome: '+data.nome+'\nEmpresa: '+data.empresa+'\nEmail: '+data.email+'\nMensagem: '+data.msg);
+        const mailto='mailto:pixelpep@mail.com?subject='+subject+'&body='+body;
+        document.getElementById('result').innerHTML='Pedido preparado. <a href="'+mailto+'" style="color:var(--accent-2);font-weight:800">Enviar por email</a> • Ou aguarde resposta.';
+        // clear minimal fields
+        document.getElementById('nome').value='';document.getElementById('mensagem').value='';document.getElementById('email').value='';
+      },800);
+    });
+
+    // contact form
+    document.getElementById('contactForm').addEventListener('submit',function(e){
+      e.preventDefault();
+      const name=document.getElementById('c-name').value;
+      const email=document.getElementById('c-email').value;
+      const phone=document.getElementById('c-phone').value;
+      const service=document.getElementById('c-service').value;
+      const desc=document.getElementById('c-desc').value;
+      const payload='Nome: '+name+'\nEmail: '+email+'\nTel: '+phone+'\nServiço: '+service+'\nDescrição: '+desc;
+      const subject=encodeURIComponent('Proposta — '+service);
+      const body=encodeURIComponent(payload);
+      const mailto='mailto:pixelpep@mail.com?subject='+subject+'&body='+body;
+      document.getElementById('c-result').innerHTML='Pronto. <a href="'+mailto+'" style="color:var(--accent-2);font-weight:800">Enviar por email</a>';
+      // for future: hook to Formspree or backend endpoint
+    });
+
+    // services modal
+    const servicesDetail={
+      marketing:`<h3>Marketing Digital — O que inclui</h3><ul><li>Estratégia de funil e planeamento</li><li>Campanhas PPC (Google Ads, Meta)</li><li>SEO on‑page e técnico</li><li>Email marketing & automações</li><li>Relatórios e otimização semanal</li></ul><p class='muted'>Entregáveis: plano estratégico, criativos, relatórios.</p>`,
+      publicidade:`<h3>Publicidade — O que inclui</h3><ul><li>Conceito criativo e design</li><li>Produção de banners, vídeo curto e assets para redes</li><li>Gestão de campanhas multi‑canal</li><li>A/B testing e otimização criativa</li></ul><p class='muted'>Entregáveis: assets finais em vários formatos, guidelines.</p>`,
+      web:`<h3>Criação de Websites — O que inclui</h3><ul><li>Wireframe e protótipo</li><li>Design responsivo</li><li>Desenvolvimento (HTML/CSS/JS — Netlify-ready)</li><li>Integração com analytics e SEO básico</li><li>Opção de manutenção e hosting</li></ul><p class='muted'>Entregáveis: site publicado, repo Git e manual de manutenção.</p>`
+    };
+    function openService(key){
+      document.getElementById('serviceContent').innerHTML=servicesDetail[key]||'';
+      document.getElementById('serviceModal').style.display='block';
+      window.scrollTo({top:document.getElementById('serviceModal').offsetTop-60,behavior:'smooth'});
+    }
+    function closeService(){document.getElementById('serviceModal').style.display='none'}
+
+    // portfolio piece
+    function openPiece(name){
+      alert('Abrir detalhe: '+name+' — substitui com imagens e estudo de caso real.');
+    }
+
+    // faq toggles
+    function toggleFaq(btn){
+      const item=btn.parentElement;
+      item.classList.toggle('open');
+    }
+
+    // small UX: smooth scroll for nav
+    document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}}));
+
+  </script>
 </body>
 </html>
